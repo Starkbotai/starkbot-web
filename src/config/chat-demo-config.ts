@@ -27,19 +27,19 @@ export const chatSequences: ChatSequence[] = [
       {
         type: 'typing',
         delay: 1000,
-        content: 'install the alchemy skill from https://4claw.com/skills/alchemy.md and look up my wallet balance'
+        content: 'download the alchemy skill off of starkhub and use it to monitor transactions for address 0x57bf...d989'
       },
       {
         type: 'user',
         delay: 500,
-        content: 'install the alchemy skill from https://4claw.com/skills/alchemy.md and look up my wallet balance'
+        content: 'download the alchemy skill off of starkhub and use it to monitor transactions for address 0x57bf...d989'
       },
       {
         type: 'tool_call',
         delay: 800,
         toolName: 'install_skill',
         params: {
-          url: 'https://4claw.com/skills/alchemy.md',
+          source: 'starkhub',
           name: 'alchemy'
         }
       },
@@ -51,37 +51,39 @@ export const chatSequences: ChatSequence[] = [
         content: JSON.stringify({
           status: 'installed',
           skill: 'alchemy',
-          tools: ['get_token_balances', 'get_transactions', 'get_nfts'],
-          source: '4claw.com'
+          tools: ['get_token_balances', 'get_transactions', 'get_nfts', 'monitor_address'],
+          source: 'starkhub'
         }, null, 2)
       },
       {
         type: 'tool_call',
         delay: 600,
-        toolName: 'get_token_balances',
+        toolName: 'get_transactions',
         params: {
           address: '0x57bf...d989',
-          chain: 'base'
+          chain: 'base',
+          limit: 5
         }
       },
       {
         type: 'tool_result',
         delay: 1400,
-        toolName: 'get_token_balances',
+        toolName: 'get_transactions',
         success: true,
         content: JSON.stringify({
-          balances: [
-            { token: 'ETH', balance: '1.247', value_usd: '$4,051' },
-            { token: 'USDC', balance: '2,500.00', value_usd: '$2,500' },
-            { token: 'STARKBOT', balance: '850,000', value_usd: '$357' }
+          address: '0x57bf...d989',
+          transactions: [
+            { type: 'swap', from: '0.5 ETH', to: '1,622 USDC', time: '2m ago' },
+            { type: 'transfer', amount: '10,000 STARKBOT', to: '0x8a3f...c102', time: '18m ago' },
+            { type: 'swap', from: '1,000 USDC', to: '2.4M STARKBOT', time: '1h ago' }
           ],
-          total_usd: '$6,908'
+          monitoring: 'active'
         }, null, 2)
       },
       {
         type: 'assistant',
         delay: 600,
-        content: "Installed the **alchemy** skill from 4claw.com. Here's your wallet balance on Base:\n\n- **1.247 ETH** ($4,051)\n- **2,500 USDC** ($2,500)\n- **850K STARKBOT** ($357)\n\nTotal: **$6,908**"
+        content: "Installed the **alchemy** skill from StarkHub. Now monitoring `0x57bf...d989` on Base. Recent activity:\n\n- **Swap** 0.5 ETH → 1,622 USDC (2m ago)\n- **Transfer** 10K STARKBOT → 0x8a3f...c102 (18m ago)\n- **Swap** 1,000 USDC → 2.4M STARKBOT (1h ago)\n\nI'll notify you of new transactions."
       }
     ]
   },
