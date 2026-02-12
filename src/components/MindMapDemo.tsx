@@ -127,8 +127,8 @@ export function MindMapDemo() {
     `;
     containerRef.current.appendChild(animContainer);
 
-    // Rainbow colors
-    const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0080ff', '#8000ff', '#ff00ff'];
+    // Monochrome confetti
+    const colors = ['#ffffff', '#FBFBFB', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040'];
 
     // Create confetti sprinkles bursting from node
     const numSprinkles = 30;
@@ -389,7 +389,7 @@ export function MindMapDemo() {
       .selectAll('line')
       .data(d3Links)
       .join('line')
-      .attr('stroke', '#444')
+      .attr('stroke', '#333')
       .attr('stroke-width', 2)
       .attr('stroke-opacity', 0.6);
 
@@ -407,21 +407,21 @@ export function MindMapDemo() {
       const hasBody = d.body.trim().length > 0;
       if (d.is_trunk) {
         return hovered
-          ? (hasBody ? '#60a5fa' : '#94a3b8')
-          : (hasBody ? '#3b82f6' : '#64748b');
+          ? (hasBody ? '#e5e5e5' : '#737373')
+          : (hasBody ? '#FBFBFB' : '#525252');
       } else {
         return hovered
-          ? (hasBody ? '#e5e7eb' : '#9ca3af')
-          : (hasBody ? '#ffffff' : '#6b7280');
+          ? (hasBody ? '#d4d4d4' : '#737373')
+          : (hasBody ? '#a3a3a3' : '#404040');
       }
     };
 
     const getNodeStroke = (d: D3Node) => {
       const hasBody = d.body.trim().length > 0;
       if (d.is_trunk) {
-        return hasBody ? '#2563eb' : '#475569';
+        return hasBody ? '#FBFBFB' : '#404040';
       } else {
-        return hasBody ? '#888' : '#4b5563';
+        return hasBody ? '#737373' : '#333';
       }
     };
 
@@ -438,7 +438,7 @@ export function MindMapDemo() {
       .text('+')
       .attr('text-anchor', 'middle')
       .attr('dy', '0.35em')
-      .attr('fill', d => d.is_trunk ? '#fff' : '#666')
+      .attr('fill', d => d.is_trunk ? '#070707' : '#1a1a1a')
       .attr('font-size', d => d.is_trunk ? '18px' : '14px')
       .attr('font-weight', 'bold')
       .style('pointer-events', 'none');
@@ -448,7 +448,7 @@ export function MindMapDemo() {
       .text(d => d.body.slice(0, 12) + (d.body.length > 12 ? '...' : ''))
       .attr('text-anchor', 'middle')
       .attr('dy', d => d.is_trunk ? 42 : 32)
-      .attr('fill', '#888')
+      .attr('fill', '#6a6a6b')
       .attr('font-size', '10px')
       .style('pointer-events', 'none');
 
@@ -534,56 +534,56 @@ export function MindMapDemo() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Container - mimics the mind map UI */}
-      <div className="bg-black rounded-xl border border-gray-800 overflow-hidden shadow-2xl">
+      <div className="bg-[#070707] rounded-xl border border-white/[0.08] overflow-hidden shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800 bg-gray-900/50">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08] bg-white/[0.02]">
           <div className="flex items-center gap-3">
-            <GitBranch className="w-5 h-5 text-white" />
-            <span className="text-lg font-bold text-white">Mind Map</span>
-            <div className="flex items-center gap-2 bg-gray-800 px-2 py-1 rounded">
-              <span className="text-xs text-gray-400">{nodes.length} nodes</span>
+            <GitBranch className="w-5 h-5 text-[#FBFBFB]" />
+            <span className="text-lg font-bold text-[#FBFBFB]">Mind Map</span>
+            <div className="flex items-center gap-2 bg-white/[0.05] px-2 py-1 rounded">
+              <span className="text-xs text-[#6a6a6b]">{nodes.length} nodes</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
             {/* Heartbeat toggle */}
             <div className="flex items-center gap-2">
               {countdown && heartbeatEnabled && (
-                <span className="text-xs text-gray-400 font-mono" title="Time to next pulse">
+                <span className="text-xs text-[#6a6a6b] font-mono" title="Time to next pulse">
                   {countdown}
                 </span>
               )}
               <div className="group cursor-pointer">
                 <Heart
                   size={16}
-                  className={`${heartbeatEnabled ? 'text-blue-500 fill-blue-500 animate-heartbeat' : 'text-gray-500 group-hover-heartbeat'} transition-colors group-hover:text-blue-400 group-hover:fill-blue-400 group-hover:animate-heartbeat`}
+                  className={`${heartbeatEnabled ? 'text-[#FBFBFB] fill-[#FBFBFB] animate-heartbeat' : 'text-[#6a6a6b] group-hover-heartbeat'} transition-colors group-hover:text-[#FBFBFB]/80 group-hover:fill-[#FBFBFB]/80 group-hover:animate-heartbeat`}
                 />
               </div>
               <button
                 onClick={() => setHeartbeatEnabled(!heartbeatEnabled)}
                 className={`relative w-10 h-5 rounded-full transition-colors ${
-                  heartbeatEnabled ? 'bg-blue-500' : 'bg-gray-600'
+                  heartbeatEnabled ? 'bg-[#FBFBFB]' : 'bg-[#333]'
                 } cursor-pointer`}
                 title={heartbeatEnabled ? 'Disable heartbeat' : 'Enable heartbeat'}
               >
                 <span
-                  className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
-                    heartbeatEnabled ? 'translate-x-5' : 'translate-x-0'
+                  className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full transition-transform ${
+                    heartbeatEnabled ? 'translate-x-5 bg-[#070707]' : 'translate-x-0 bg-[#6a6a6b]'
                   }`}
                 />
               </button>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-gray-500">
+            <div className="flex items-center gap-2 text-xs text-[#6a6a6b]">
               <MousePointer className="w-3 h-3" />
               <span>Click to add</span>
-              <span className="text-gray-700">|</span>
+              <span className="text-[#333]">|</span>
               <span>Right-click to edit</span>
             </div>
 
             {/* Hamburger menu */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+              className="p-2 rounded-lg text-[#6a6a6b] hover:text-[#FBFBFB] hover:bg-white/[0.05] transition-colors"
               title="Execution History"
             >
               <Menu size={18} />
@@ -598,19 +598,19 @@ export function MindMapDemo() {
             <svg
               ref={svgRef}
               className="w-full h-full"
-              style={{ background: '#000' }}
+              style={{ background: '#070707' }}
             />
 
             {/* Hover Tooltip */}
             {hoveredNode && (
-              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 max-w-sm px-3 py-2 bg-gray-900/95 border border-gray-700 rounded-lg shadow-xl pointer-events-none">
+              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 max-w-sm px-3 py-2 bg-[#0a0a0a]/95 border border-white/[0.08] rounded-lg shadow-xl pointer-events-none">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className={`text-xs px-2 py-0.5 rounded ${hoveredNode.is_trunk ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded ${hoveredNode.is_trunk ? 'bg-white/[0.08] text-[#FBFBFB]/70' : 'bg-white/[0.05] text-[#6a6a6b]'}`}>
                     {hoveredNode.is_trunk ? 'Trunk' : `Node #${hoveredNode.id}`}
                   </span>
                 </div>
-                <p className="text-xs text-white whitespace-pre-wrap break-words">
-                  {hoveredNode.body || <span className="text-gray-500 italic">Empty node - right click to add content</span>}
+                <p className="text-xs text-[#FBFBFB] whitespace-pre-wrap break-words">
+                  {hoveredNode.body || <span className="text-[#6a6a6b] italic">Empty node - right click to add content</span>}
                 </p>
               </div>
             )}
@@ -618,19 +618,19 @@ export function MindMapDemo() {
 
           {/* Sidebar */}
           <div
-            className={`border-l border-gray-800 bg-gray-900 flex flex-col transition-all duration-300 overflow-hidden ${
+            className={`border-l border-white/[0.08] bg-[#0a0a0a] flex flex-col transition-all duration-300 overflow-hidden ${
               sidebarOpen ? 'w-64' : 'w-0 border-l-0'
             }`}
           >
             {/* Sidebar Header */}
-            <div className="p-3 border-b border-gray-800 flex items-center justify-between flex-shrink-0">
+            <div className="p-3 border-b border-white/[0.08] flex items-center justify-between flex-shrink-0">
               <div className="flex items-center gap-2">
-                <Clock size={14} className="text-gray-400" />
-                <span className="text-sm font-medium text-white">Execution History</span>
+                <Clock size={14} className="text-[#6a6a6b]" />
+                <span className="text-sm font-medium text-[#FBFBFB]">Execution History</span>
               </div>
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="p-1 text-gray-400 hover:text-white"
+                className="p-1 text-[#6a6a6b] hover:text-[#FBFBFB]"
               >
                 <X size={14} />
               </button>
@@ -639,30 +639,30 @@ export function MindMapDemo() {
             {/* Execution List */}
             <div className="flex-1 overflow-y-auto">
               {executionHistory.length === 0 ? (
-                <div className="p-4 text-center text-gray-500 text-xs">
+                <div className="p-4 text-center text-[#6a6a6b] text-xs">
                   No executions yet.<br />Click "Pulse Once" to trigger one.
                 </div>
               ) : (
-                <div className="divide-y divide-gray-800">
+                <div className="divide-y divide-white/[0.06]">
                   {executionHistory.map((execution) => (
                     <div
                       key={execution.id}
-                      className="p-3 hover:bg-gray-800/50 transition-colors"
+                      className="p-3 hover:bg-white/[0.03] transition-colors"
                     >
                       <div className="flex items-center justify-between mb-1">
                         <span className={`text-xs px-2 py-0.5 rounded ${
                           execution.nodeId === 1
-                            ? 'bg-green-500/20 text-green-400'
-                            : 'bg-amber-500/20 text-amber-400'
+                            ? 'bg-white/[0.08] text-[#FBFBFB]/70'
+                            : 'bg-white/[0.05] text-[#6a6a6b]'
                         }`}>
                           {execution.nodeId === 1 ? 'Trunk' : `Node #${execution.nodeId}`}
                         </span>
-                        <span className="text-xs text-gray-500">{execution.time}</span>
+                        <span className="text-xs text-[#6a6a6b]">{execution.time}</span>
                       </div>
-                      <p className="text-xs text-gray-400 truncate mb-1">
+                      <p className="text-xs text-[#6a6a6b] truncate mb-1">
                         {execution.nodeBody}
                       </p>
-                      <div className="flex items-center gap-1 text-xs text-gray-500">
+                      <div className="flex items-center gap-1 text-xs text-[#6a6a6b]">
                         <MessageSquare size={10} />
                         <span>{execution.messageCount} messages</span>
                       </div>
@@ -675,19 +675,19 @@ export function MindMapDemo() {
         </div>
 
         {/* Instructions */}
-        <div className="px-4 py-3 border-t border-gray-800 bg-gray-900/30">
+        <div className="px-4 py-3 border-t border-white/[0.08] bg-white/[0.02]">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6 text-xs text-gray-500">
+            <div className="flex items-center gap-6 text-xs text-[#6a6a6b]">
               <div className="flex items-center gap-1.5">
-                <Plus className="w-3.5 h-3.5 text-white" />
+                <Plus className="w-3.5 h-3.5 text-[#FBFBFB]" />
                 <span>Click node to add child</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="px-1.5 py-0.5 bg-gray-800 rounded text-gray-400 font-mono">Right-click</span>
+                <span className="px-1.5 py-0.5 bg-white/[0.05] rounded text-[#6a6a6b] font-mono">Right-click</span>
                 <span>Edit node content</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-gray-400">Drag</span>
+                <span className="text-[#6a6a6b]">Drag</span>
                 <span>to reposition</span>
               </div>
             </div>
@@ -696,8 +696,8 @@ export function MindMapDemo() {
               disabled={isPulsing}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                 isPulsing
-                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                  : 'bg-gray-700 hover:bg-gray-600 text-white'
+                  ? 'bg-white/[0.05] text-[#6a6a6b] cursor-not-allowed'
+                  : 'bg-white/[0.08] hover:bg-white/[0.12] text-[#FBFBFB]'
               }`}
             >
               <Zap className={`w-4 h-4 ${isPulsing ? 'animate-pulse' : ''}`} />
@@ -710,27 +710,27 @@ export function MindMapDemo() {
       {/* Edit Modal */}
       {editingNode && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="bg-gray-900 rounded-lg p-6 w-full max-w-md mx-4 border border-gray-700">
+          <div className="bg-[#0a0a0a] rounded-lg p-6 w-full max-w-md mx-4 border border-white/[0.08]">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white">
+              <h2 className="text-lg font-semibold text-[#FBFBFB]">
                 {editingNode.is_trunk ? 'Edit Trunk Node' : 'Edit Node'}
               </h2>
               <button
                 onClick={() => setEditingNode(null)}
-                className="text-gray-400 hover:text-white"
+                className="text-[#6a6a6b] hover:text-[#FBFBFB]"
               >
                 <X size={20} />
               </button>
             </div>
 
-            <p className="text-xs text-gray-500 mb-3">
+            <p className="text-xs text-[#6a6a6b] mb-3">
               Enter the action or prompt for the heartbeat to execute when this node is selected.
             </p>
 
             <textarea
               value={editBody}
               onChange={(e) => setEditBody(e.target.value)}
-              className="w-full h-28 bg-gray-800 border border-gray-600 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none text-sm"
+              className="w-full h-28 bg-white/[0.03] border border-white/[0.08] rounded-lg p-3 text-[#FBFBFB] placeholder-[#6a6a6b] focus:outline-none focus:ring-2 focus:ring-white/20 resize-none text-sm"
               placeholder={placeholder}
               autoFocus
             />
@@ -748,13 +748,13 @@ export function MindMapDemo() {
               <div className={`flex gap-2 ${editingNode.is_trunk ? 'ml-auto' : ''}`}>
                 <button
                   onClick={() => setEditingNode(null)}
-                  className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm"
+                  className="px-3 py-2 bg-white/[0.08] hover:bg-white/[0.12] text-[#FBFBFB] rounded-lg transition-colors text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSaveEdit}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-gray-200 text-black rounded-lg transition-colors text-sm"
+                  className="flex items-center gap-1.5 px-3 py-2 bg-[#FBFBFB] hover:bg-white/90 text-[#070707] rounded-lg transition-colors text-sm"
                 >
                   <Save size={14} />
                   Save

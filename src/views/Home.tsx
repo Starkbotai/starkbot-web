@@ -32,7 +32,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#070707]">
       <Stars />
       <GridBackground />
       <div className="relative z-10">

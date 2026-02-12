@@ -18,19 +18,19 @@ function XIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-white/10">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="py-12 px-6 border-t border-white/[0.06]">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <img src="/starkbot-pfp.png" alt="StarkBot" className="w-8 h-8 rounded-lg object-cover" />
-          <span className="font-semibold text-white">StarkBot</span>
+          <span className="font-display font-semibold text-[#FBFBFB]">starkbot</span>
         </div>
-        <p className="text-white/50 text-sm">
+        <p className="text-[#6a6a6b] text-sm">
           made with &lt;3 by{' '}
           <a
             href="https://ethereumdegen.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/70 hover:text-white transition-colors"
+            className="text-[#FBFBFB]/70 hover:text-[#FBFBFB] transition-colors"
           >
             @ethereumdegen
           </a>
@@ -40,7 +40,7 @@ export function Footer() {
             href="https://discord.gg/V26YeqBfXc"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors"
           >
             <DiscordIcon className="w-6 h-6" />
           </a>
@@ -48,7 +48,7 @@ export function Footer() {
             href="https://x.com/starkbotai"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors"
           >
             <XIcon className="w-5 h-5" />
           </a>
@@ -56,7 +56,7 @@ export function Footer() {
             href="https://github.com/ethereumdegen/stark-bot"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors"
           >
             <Github className="w-6 h-6" />
           </a>

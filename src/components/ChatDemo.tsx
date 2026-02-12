@@ -151,25 +151,25 @@ export function ChatDemo() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Chat container - mimics the agent chat UI */}
-      <div className="bg-slate-900 rounded-xl border border-slate-700 overflow-hidden shadow-2xl">
+      <div className="bg-[#0a0a0a] rounded-xl border border-white/[0.08] overflow-hidden shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700 bg-slate-800/50">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08] bg-white/[0.02]">
           <div className="flex items-center gap-3">
-            <span className="text-lg font-bold text-white">Agent Chat</span>
-            <div className="flex items-center gap-2 bg-slate-700/50 px-2 py-1 rounded">
-              <span className="text-xs text-slate-500">Session:</span>
-              <span className="text-xs font-mono text-slate-300">00000042</span>
+            <span className="text-lg font-bold text-[#FBFBFB]">Agent Chat</span>
+            <div className="flex items-center gap-2 bg-white/[0.05] px-2 py-1 rounded">
+              <span className="text-xs text-[#6a6a6b]">Session:</span>
+              <span className="text-xs font-mono text-[#FBFBFB]/60">00000042</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-400" />
-              <span className="text-sm text-slate-400">Connected</span>
+              <span className="w-2 h-2 rounded-full bg-[#FBFBFB]/30" />
+              <span className="text-sm text-[#6a6a6b]">Connected</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-slate-300 bg-slate-700/50 px-2 py-1 rounded">
+            <span className="text-xs font-mono text-[#FBFBFB]/60 bg-white/[0.05] px-2 py-1 rounded">
               0x57bf...d989
             </span>
-            <span className="text-xs px-2 py-0.5 bg-white/10 text-white/60 rounded-full font-medium">
+            <span className="text-xs px-2 py-0.5 bg-white/[0.06] text-[#FBFBFB]/50 rounded-full font-medium">
               USDC
             </span>
           </div>
@@ -179,7 +179,7 @@ export function ChatDemo() {
         <div ref={messagesContainerRef} className="h-80 overflow-y-auto p-4 space-y-3">
           {messages.length === 0 ? (
             <div className="h-full flex items-center justify-center">
-              <div className="text-center text-slate-500">
+              <div className="text-center text-[#6a6a6b]">
                 <p>Start a conversation...</p>
               </div>
             </div>
@@ -199,16 +199,16 @@ export function ChatDemo() {
                 value={inputValue}
                 readOnly
                 placeholder="Type a message or /command..."
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none"
+                className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-[#FBFBFB] placeholder-[#6a6a6b] focus:outline-none"
               />
               {isTyping && (
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-white animate-pulse" />
               )}
             </div>
-            <button className="p-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-400 hover:text-white transition-colors">
+            <button className="p-3 bg-white/[0.05] border border-white/[0.08] rounded-lg text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors">
               <Menu className="w-5 h-5" />
             </button>
-            <button className="p-3 bg-orange-500 hover:bg-orange-600 rounded-lg text-white transition-colors">
+            <button className="p-3 bg-[#FBFBFB] hover:bg-white/90 rounded-lg text-[#070707] transition-colors">
               <Send className="w-5 h-5" />
             </button>
           </div>
@@ -223,7 +223,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
   if (message.type === 'user') {
     return (
       <div className="flex justify-end animate-fade-in">
-        <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-br-md bg-orange-500 text-white">
+        <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-br-md bg-[#FBFBFB] text-[#070707]">
           <p className="whitespace-pre-wrap break-words text-sm">{message.content}</p>
         </div>
       </div>
@@ -233,20 +233,20 @@ function MessageBubble({ message }: { message: ChatMessage }) {
   if (message.type === 'tool_call') {
     return (
       <div className="flex justify-start animate-fade-in">
-        <div className="w-full px-4 py-3 rounded-r-xl rounded-l-sm border-l-4 border-l-amber-500 bg-slate-800/95 border border-slate-700/60">
+        <div className="w-full px-4 py-3 rounded-r-xl rounded-l-sm border-l-4 border-l-amber-500 bg-white/[0.03] border border-white/[0.06]">
           <div className="flex items-center gap-2 mb-2">
             <Wrench className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-semibold text-amber-300">Tool</span>
           </div>
-          <div className="bg-slate-900/80 rounded-lg p-3">
-            <p className="text-sm text-slate-200 mb-2">
-              <span className="text-slate-400">Tool Call:</span>{' '}
+          <div className="bg-black/40 rounded-lg p-3">
+            <p className="text-sm text-[#FBFBFB]/80 mb-2">
+              <span className="text-[#6a6a6b]">Tool Call:</span>{' '}
               <code className="bg-amber-500/20 px-1.5 py-0.5 rounded text-amber-300 text-xs font-mono">
                 {message.toolName}
               </code>
             </p>
-            <pre className="text-xs font-mono text-slate-300 overflow-x-auto">
-              <span className="text-slate-500">json</span>
+            <pre className="text-xs font-mono text-[#FBFBFB]/50 overflow-x-auto">
+              <span className="text-[#6a6a6b]">json</span>
               {'\n'}
               {JSON.stringify(message.params, null, 2)}
             </pre>
@@ -259,7 +259,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
   if (message.type === 'tool_result') {
     return (
       <div className="flex justify-start animate-fade-in">
-        <div className="w-full px-4 py-3 rounded-r-xl rounded-l-sm border-l-4 border-l-green-500 bg-slate-800/95 border border-slate-700/60">
+        <div className="w-full px-4 py-3 rounded-r-xl rounded-l-sm border-l-4 border-l-green-500 bg-white/[0.03] border border-white/[0.06]">
           <div className="flex items-center gap-2 mb-2">
             <CheckCircle className="w-4 h-4 text-green-400" />
             <span className="text-sm font-semibold text-green-300">Result</span>
@@ -267,11 +267,11 @@ function MessageBubble({ message }: { message: ChatMessage }) {
               success
             </span>
           </div>
-          <div className="bg-slate-900/80 rounded-lg p-3">
-            <p className="text-sm text-slate-200 mb-2">
-              <span className="text-slate-400">Result:</span> {message.toolName}
+          <div className="bg-black/40 rounded-lg p-3">
+            <p className="text-sm text-[#FBFBFB]/80 mb-2">
+              <span className="text-[#6a6a6b]">Result:</span> {message.toolName}
             </p>
-            <pre className="text-xs font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap">
+            <pre className="text-xs font-mono text-[#FBFBFB]/50 overflow-x-auto whitespace-pre-wrap">
               {message.content}
             </pre>
           </div>
@@ -283,7 +283,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
   if (message.type === 'assistant') {
     return (
       <div className="flex justify-start animate-fade-in">
-        <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md bg-slate-800 text-slate-100">
+        <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md bg-white/[0.05] text-[#FBFBFB]/90">
           <div
             className="prose prose-sm prose-invert max-w-none leading-relaxed"
             dangerouslySetInnerHTML={{ __html: parseMarkdown(message.content) }}

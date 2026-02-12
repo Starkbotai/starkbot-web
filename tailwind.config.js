@@ -7,22 +7,33 @@ export default {
   theme: {
     extend: {
       colors: {
+        stark: {
+          bg: '#070707',
+          surface: '#0f0f0f',
+          border: 'rgba(255, 255, 255, 0.08)',
+          'border-hover': 'rgba(255, 255, 255, 0.16)',
+        },
         tempo: {
-          bg: '#1a1a1a',
+          bg: '#070707',
           surface: 'rgba(255, 255, 255, 0.05)',
-          border: 'rgba(255, 255, 255, 0.1)',
-          'border-hover': 'rgba(255, 255, 255, 0.2)',
+          border: 'rgba(255, 255, 255, 0.08)',
+          'border-hover': 'rgba(255, 255, 255, 0.16)',
           muted: 'rgba(255, 255, 255, 0.5)',
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['GeistMono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['Space Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'grid-pulse': 'grid-pulse 4s ease-in-out infinite',
         'heartbeat': 'heartbeat 0.6s ease-in-out infinite',
+        'slide-up': 'slide-up 0.8s ease-out forwards',
+        'slide-in-right': 'slide-in-right 1s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+        'cursor-blink': 'cursor-blink 1s step-end infinite',
       },
       keyframes: {
         float: {
@@ -39,6 +50,22 @@ export default {
           '28%': { transform: 'scale(1)' },
           '42%': { transform: 'scale(1.3)' },
           '70%': { transform: 'scale(1)' },
+        },
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'slide-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(60px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'cursor-blink': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
       }
     },

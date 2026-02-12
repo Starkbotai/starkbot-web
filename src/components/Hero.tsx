@@ -1,92 +1,131 @@
-import { Github, ChevronDown, BookOpen, Heart } from 'lucide-react'
+import { Github, Code2, Shield, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { TypeWriter } from './TypeWriter'
+import { AnimatedCounter } from './AnimatedCounter'
+import { ChatDemo } from './ChatDemo'
+
+const DEFINITIONS = [
+  'Your autonomous agent that **owns its wallet**',
+  'Your autonomous agent that **pays for itself**',
+  'Your autonomous agent that **proves its identity**',
+  'Your autonomous agent that **ships from chat**',
+  'Your autonomous agent that **auto-monitors wallets**',
+  'Your autonomous agent that **automates DeFi strategy**',
+  'Your autonomous agent that **trades on your behalf**',
+  'Your autonomous agent that **automates social media**',
+  'Your autonomous agent that **runs on a heartbeat**',
+  'Your autonomous agent that **writes and deploys code**',
+  'Your autonomous agent that **automates dev-ops**',
+  'Your autonomous agent that **helps your community grow**',
+]
 
 export function Hero() {
   return (
-    <section className="pt-32 pb-20 px-6 relative">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Mascot/Logo - flips to old logo on hover */}
-        <div className="mb-8 animate-float">
-          <div className="w-32 h-32 mx-auto [perspective:600px] group cursor-pointer">
-            <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-              {/* Front - new logo */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden glow [backface-visibility:hidden]">
-                <img src="/starkbot-pfp.png" alt="StarkBot" className="w-full h-full object-cover" />
-              </div>
-              {/* Back - old logo */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden glow [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                <img src="/starkbot.png" alt="StarkBot Classic" className="w-full h-full object-cover" />
-              </div>
+    <section className="pt-28 sm:pt-36 pb-20 sm:pb-28 px-6 relative">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left column — Copy + CTAs */}
+          <div className="space-y-8">
+            {/* Pill badge */}
+            <div
+              className="inline-block opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '0.1s' }}
+            >
+              <span className="px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-[#6a6a6b] text-xs font-mono tracking-wider uppercase">
+                crypto-native ai agent
+              </span>
+            </div>
+
+            {/* Dictionary-style title */}
+            <div
+              className="opacity-0 animate-slide-up"
+              style={{ animationDelay: '0.2s' }}
+            >
+              <h1 className="flex items-center gap-3 flex-wrap">
+                <span className="text-5xl sm:text-7xl font-display font-bold tracking-tight text-[#FBFBFB]">
+                  starkbot
+                </span>
+                <img src="/starkbot-pfp.png" alt="StarkBot" className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl object-cover border border-white/[0.08] shadow-lg shadow-white/5 translate-y-1" />
+              </h1>
+            </div>
+
+            {/* Typing definition */}
+            <div
+              className="opacity-0 animate-slide-up"
+              style={{ animationDelay: '0.35s' }}
+            >
+              <p className="text-lg sm:text-xl text-[#6a6a6b] leading-relaxed min-h-[3.5rem]">
+                <TypeWriter phrases={DEFINITIONS} typingSpeed={50} deletingSpeed={25} pauseDuration={2500} />
+              </p>
+            </div>
+
+            {/* Ideology tagline */}
+            <div
+              className="opacity-0 animate-slide-up"
+              style={{ animationDelay: '0.5s' }}
+            >
+              <p className="text-base sm:text-lg font-medium text-[#FBFBFB]/80 tracking-wide">
+                Own your agent. Own your data. Own your economy.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div
+              className="flex flex-col sm:flex-row gap-4 opacity-0 animate-slide-up"
+              style={{ animationDelay: '0.6s' }}
+            >
+              <a
+                href="https://starkbot.cloud"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-7 py-3.5 bg-[#FBFBFB] text-[#070707] font-semibold rounded-xl transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:shadow-white/10 flex items-center justify-center gap-2 text-sm"
+              >
+                Get Started
+                <span className="text-base">&rarr;</span>
+              </a>
+              <a
+                href="https://github.com/ethereumdegen/stark-bot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-7 py-3.5 bg-transparent text-[#FBFBFB] font-semibold rounded-xl transition-all duration-300 border border-white/[0.12] hover:border-white/25 hover:bg-white/[0.04] flex items-center justify-center gap-2.5 text-sm"
+              >
+                <Github className="w-5 h-5" />
+                GitHub
+              </a>
+            </div>
+
+            {/* Stat counters */}
+            <div
+              className="flex flex-wrap gap-6 pt-4 opacity-0 animate-slide-up"
+              style={{ animationDelay: '0.75s' }}
+            >
+              <AnimatedCounter
+                icon={<Code2 className="w-5 h-5" />}
+                text="100%"
+                label="Open Source"
+              />
+              <AnimatedCounter
+                icon={<Zap className="w-5 h-5" />}
+                text="x402"
+                label="Native Payments"
+              />
+              <AnimatedCounter
+                icon={<Shield className="w-5 h-5" />}
+                text="EIP-8004"
+                label="On-Chain ID"
+              />
             </div>
           </div>
-        </div>
 
-        {/* Title with Heart */}
-        <div className="relative inline-block">
-          <h1 className="text-5xl sm:text-7xl font-black mb-6 tracking-tight text-white">
-            StarkBot
-          </h1>
-          <Link
-            to="/docs/scheduling"
-            className="absolute -top-2 -right-10 sm:-right-14 group cursor-pointer"
-            title="Heartbeat scheduling"
+          {/* Right column — ChatDemo */}
+          <div
+            className="opacity-0 animate-slide-in-right lg:pl-4"
+            style={{ animationDelay: '0.4s' }}
           >
-            <Heart
-              size={24}
-              className="text-blue-500 fill-blue-500 group-hover:animate-heartbeat"
-            />
-          </Link>
-        </div>
-
-        {/* Tagline */}
-        <p className="text-white/70 text-xl sm:text-2xl font-semibold uppercase tracking-widest mb-2">
-          Web3-Native AI Agent
-        </p>
-
-        {/* Badges */}
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm font-medium">
-            Sign In With Ethereum
-          </span>
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm font-medium">
-            x402 Payments
-          </span>
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm font-medium">
-            DeFi Relay
-          </span>
-        </div>
-
-        {/* Description */}
-        <p className="text-white/50 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-12">
-          A crypto-native AI assistant with wallet authentication, x402 micropayments, and autonomous agent capabilities.
-          Open source, self-hostable, and built for the decentralized web.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://github.com/ethereumdegen/stark-bot"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 bg-gradient-to-r from-white/20 to-white/10 hover:from-white/25 hover:to-white/15 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-white/10 border border-white/20 flex items-center justify-center gap-3"
-          >
-            <Github className="w-6 h-6" />
-            View on GitHub
-          </a>
-          <Link
-            to="/docs"
-            className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-all duration-300 border border-white/20 hover:border-white/40 flex items-center justify-center gap-3"
-          >
-            <BookOpen className="w-6 h-6" />
-            Read the Docs
-          </Link>
-          <a
-            href="#features"
-            className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-all duration-300 border border-white/20 hover:border-white/30 flex items-center justify-center gap-2"
-          >
-            Learn More
-            <ChevronDown className="w-5 h-5" />
-          </a>
+            <div className="chat-demo-glow rounded-xl transition-transform duration-300 hover:[transform:perspective(800px)_rotateY(-2deg)_rotateX(1deg)]">
+              <ChatDemo />
+            </div>
+          </div>
         </div>
       </div>
     </section>

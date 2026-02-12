@@ -21,42 +21,67 @@ export interface ChatSequence {
 // All available chat sequences
 export const chatSequences: ChatSequence[] = [
   {
-    id: 'dad-joke',
-    name: 'Dad Joke',
+    id: 'install-skill',
+    name: 'Install Skill & Use It',
     rows: [
       {
         type: 'typing',
         delay: 1000,
-        content: 'tell me a joke. https://dad-jokes-agent-production.up.railway.app'
+        content: 'install the alchemy skill from https://4claw.com/skills/alchemy.md and look up my wallet balance'
       },
       {
         type: 'user',
         delay: 500,
-        content: 'tell me a joke. https://dad-jokes-agent-production.up.railway.app'
+        content: 'install the alchemy skill from https://4claw.com/skills/alchemy.md and look up my wallet balance'
       },
       {
         type: 'tool_call',
         delay: 800,
-        toolName: 'http_request',
+        toolName: 'install_skill',
         params: {
-          method: 'GET',
-          url: 'https://dad-jokes-agent-production.up.railway.app/joke'
+          url: 'https://4claw.com/skills/alchemy.md',
+          name: 'alchemy'
         }
       },
       {
         type: 'tool_result',
         delay: 1200,
-        toolName: 'http_request',
+        toolName: 'install_skill',
         success: true,
         content: JSON.stringify({
-          setup: "Why do programmers prefer dark mode?",
-          punchline: "Because light attracts bugs!"
+          status: 'installed',
+          skill: 'alchemy',
+          tools: ['get_token_balances', 'get_transactions', 'get_nfts'],
+          source: '4claw.com'
+        }, null, 2)
+      },
+      {
+        type: 'tool_call',
+        delay: 600,
+        toolName: 'get_token_balances',
+        params: {
+          address: '0x57bf...d989',
+          chain: 'base'
+        }
+      },
+      {
+        type: 'tool_result',
+        delay: 1400,
+        toolName: 'get_token_balances',
+        success: true,
+        content: JSON.stringify({
+          balances: [
+            { token: 'ETH', balance: '1.247', value_usd: '$4,051' },
+            { token: 'USDC', balance: '2,500.00', value_usd: '$2,500' },
+            { token: 'STARKBOT', balance: '850,000', value_usd: '$357' }
+          ],
+          total_usd: '$6,908'
         }, null, 2)
       },
       {
         type: 'assistant',
         delay: 600,
-        content: "Here's a dad joke for you:\n\n**Why do programmers prefer dark mode?**\n\nBecause light attracts bugs!"
+        content: "Installed the **alchemy** skill from 4claw.com. Here's your wallet balance on Base:\n\n- **1.247 ETH** ($4,051)\n- **2,500 USDC** ($2,500)\n- **850K STARKBOT** ($357)\n\nTotal: **$6,908**"
       }
     ]
   },
@@ -125,44 +150,70 @@ export const chatSequences: ChatSequence[] = [
     ]
   },
   {
-    id: 'weather-check',
-    name: 'Weather Check',
+    id: 'token-analysis-tweet',
+    name: 'Token Analysis Tweet',
     rows: [
       {
         type: 'typing',
         delay: 1000,
-        content: "what's the weather in Tokyo?"
+        content: 'research the token STARKBOT and tweet a full analysis report to our followers'
       },
       {
         type: 'user',
         delay: 500,
-        content: "what's the weather in Tokyo?"
+        content: 'research the token STARKBOT and tweet a full analysis report to our followers'
       },
       {
         type: 'tool_call',
         delay: 800,
-        toolName: 'http_request',
+        toolName: 'token_research',
         params: {
-          method: 'GET',
-          url: 'https://api.weather.gov/points/35.6762,139.6503'
+          token: 'STARKBOT',
+          chain: 'base',
+          include: ['price', 'holders', 'liquidity', 'volume', 'socials']
         }
       },
       {
         type: 'tool_result',
-        delay: 1200,
-        toolName: 'http_request',
+        delay: 1800,
+        toolName: 'token_research',
         success: true,
         content: JSON.stringify({
-          location: 'Tokyo, Japan',
-          temperature: '18°C',
-          condition: 'Partly Cloudy',
-          humidity: '65%'
+          token: 'STARKBOT',
+          price_usd: 0.00042069,
+          market_cap: 420690,
+          holders: 1847,
+          liquidity: '$89,200',
+          volume_24h: '$12,500',
+          change_24h: '+15.3%',
+          deployer: 'clanker.world',
+          chain: 'Base'
+        }, null, 2)
+      },
+      {
+        type: 'tool_call',
+        delay: 600,
+        toolName: 'twitter_post',
+        params: {
+          thread: true,
+          content: '🔍 $STARKBOT Deep Dive — the crypto-native AI agent token on @base\n\n📊 Price: $0.00042 (+15.3% 24h)\n💰 MCap: $420K\n👥 Holders: 1,847\n💧 Liquidity: $89.2K\n\nOpen source agent framework with x402 payments, on-chain identity (EIP-8004), and autonomous DeFi.\n\nOne to watch. 👀'
+        }
+      },
+      {
+        type: 'tool_result',
+        delay: 1400,
+        toolName: 'twitter_post',
+        success: true,
+        content: JSON.stringify({
+          status: 'posted',
+          tweet_id: '1893847261038',
+          url: 'https://x.com/starkbotai/status/1893847261038'
         }, null, 2)
       },
       {
         type: 'assistant',
         delay: 600,
-        content: "The weather in **Tokyo** right now:\n\n- Temperature: **18°C**\n- Condition: Partly Cloudy\n- Humidity: 65%"
+        content: "Done! I researched **$STARKBOT** on Base and posted a full analysis thread to Twitter.\n\nKey stats: **$0.00042** price, **1,847 holders**, **$89.2K liquidity**, up **15.3%** in 24h.\n\nThread is live — check it out on X."
       }
     ]
   },

@@ -1,5 +1,5 @@
 import { Github, BookOpen, Palette } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function DiscordIcon({ className }: { className?: string }) {
   return (
@@ -17,34 +17,48 @@ function XIcon({ className }: { className?: string }) {
   )
 }
 
+function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
+  const location = useLocation()
+  const isActive = location.pathname === to || location.pathname.startsWith(to + '/')
+  return (
+    <Link
+      to={to}
+      className={`relative flex items-center gap-2 px-4 py-2 text-sm transition-colors ${
+        isActive
+          ? 'text-[#FBFBFB]'
+          : 'text-[#6a6a6b] hover:text-[#FBFBFB]'
+      }`}
+    >
+      {children}
+      {isActive && (
+        <span className="absolute inset-0 rounded-full bg-white/[0.06] border border-white/[0.08]" />
+      )}
+    </Link>
+  )
+}
+
 export function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#1a1a1a]/80 border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#070707]/80 border-b border-white/[0.06]">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
-          <img src="/starkbot.png" alt="StarkBot" className="w-10 h-10 rounded-xl object-cover" />
-          <span className="text-xl font-bold">StarkBot</span>
+          <img src="/starkbot.png" alt="StarkBot" className="w-9 h-9 rounded-xl object-cover" />
+          <span className="text-lg font-display font-bold text-[#FBFBFB]">starkbot</span>
         </Link>
-        <div className="flex items-center gap-3">
-          <Link
-            to="/docs"
-            className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors"
-          >
-            <BookOpen className="w-5 h-5" />
+        <div className="flex items-center gap-1.5">
+          <NavLink to="/docs">
+            <BookOpen className="w-4 h-4" />
             <span className="hidden sm:inline">Docs</span>
-          </Link>
-          <Link
-            to="/brand-kit"
-            className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors"
-          >
-            <Palette className="w-5 h-5" />
+          </NavLink>
+          <NavLink to="/brand-kit">
+            <Palette className="w-4 h-4" />
             <span className="hidden sm:inline">Brand Kit</span>
-          </Link>
+          </NavLink>
           <a
             href="https://discord.gg/V26YeqBfXc"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-2 text-white/60 hover:text-white transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors"
           >
             <DiscordIcon className="w-5 h-5" />
           </a>
@@ -52,7 +66,7 @@ export function Navbar() {
             href="https://x.com/starkbotai"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-2 text-white/60 hover:text-white transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors"
           >
             <XIcon className="w-4 h-4" />
           </a>
@@ -60,9 +74,9 @@ export function Navbar() {
             href="https://github.com/ethereumdegen/stark-bot"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-all duration-300 border border-white/10 hover:border-white/30"
+            className="flex items-center gap-2 px-4 py-2 bg-[#FBFBFB] text-[#070707] text-sm font-semibold rounded-lg transition-all duration-300 hover:bg-white/90"
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-4 h-4" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
         </div>
