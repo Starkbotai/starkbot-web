@@ -65,7 +65,7 @@ export function Hero() {
               style={{ animationDelay: '0.5s' }}
             >
               <p className="text-base sm:text-lg font-medium text-[#FBFBFB]/80 tracking-wide">
-                Own your agent. Own your data. Own your economy.
+                <span className="subtle-shimmer-text">Crypto</span> should not be an afterthought.
               </p>
             </div>
 

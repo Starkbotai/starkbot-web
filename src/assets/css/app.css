@@ -146,6 +146,28 @@ body {
   background-clip: text;
 }
 
+/* Subtle shimmer text */
+.subtle-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    rgba(251, 251, 251, 0.8) 0%,
+    rgba(147, 177, 220, 0.9) 25%,
+    rgba(251, 251, 251, 0.85) 50%,
+    rgba(130, 160, 220, 0.9) 75%,
+    rgba(251, 251, 251, 0.8) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: subtle-shimmer 6s ease-in-out infinite;
+}
+
+@keyframes subtle-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* Accent gradient border on hover */
 .accent-border-hover {
   position: relative;

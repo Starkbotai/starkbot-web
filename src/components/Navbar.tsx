@@ -1,4 +1,4 @@
-import { Github, BookOpen, Palette } from 'lucide-react'
+import { BookOpen, Palette } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
 function DiscordIcon({ className }: { className?: string }) {
@@ -55,6 +55,22 @@ export function Navbar() {
             <span className="hidden sm:inline">Brand Kit</span>
           </NavLink>
           <a
+            href="https://bounty.starkbot.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center px-3 py-1.5 text-xs font-semibold rounded-full border border-white/[0.08] bg-white/[0.04] text-[#FBFBFB] hover:bg-white/[0.08] transition-colors"
+          >
+            Bounties
+          </a>
+          <a
+            href="https://hub.starkbot.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center px-3 py-1.5 text-xs font-semibold rounded-full border border-white/[0.08] bg-white/[0.04] text-[#FBFBFB] hover:bg-white/[0.08] transition-colors"
+          >
+            Skills
+          </a>
+          <a
             href="https://discord.gg/V26YeqBfXc"
             target="_blank"
             rel="noopener noreferrer"
@@ -69,15 +85,6 @@ export function Navbar() {
             className="flex items-center gap-2 px-3 py-2 text-[#6a6a6b] hover:text-[#FBFBFB] transition-colors"
           >
             <XIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://github.com/ethereumdegen/stark-bot"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-[#FBFBFB] text-[#070707] text-sm font-semibold rounded-lg transition-all duration-300 hover:bg-white/90"
-          >
-            <Github className="w-4 h-4" />
-            <span className="hidden sm:inline">GitHub</span>
           </a>
         </div>
       </div>
